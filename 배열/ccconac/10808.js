@@ -6,7 +6,6 @@ const Solution = (input, alphabet) => {
 };
 
 const input = require('fs').readFileSync(0).toString().split('');
-
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
 Solution(input, alphabet);
