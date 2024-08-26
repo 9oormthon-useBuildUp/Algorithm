@@ -1,4 +1,4 @@
-## 👊 자바스크립트 코팅 테스트 준비
+## 👊 자바스크립트 코딩 테스트 준비
 
 1. [바킹독 알고리즘 강의](https://www.youtube.com/watch?v=LcOIobH7ues&list=PLtqbFd2VIQv4O6D6l9HcD732hdrnYb6CY)를 보며 매주 할당된 문제집과 관련된 **알고리즘의 기초적인 개념을 파악**합니다.
 2. 매주 [문제집](https://www.acmicpc.net/workbook/by/BaaaaaaaaaaarkingDog) 한 개를 풀이하고, GitHub Repository에 **하루 한 문제씩 PR**을 올립니다.
