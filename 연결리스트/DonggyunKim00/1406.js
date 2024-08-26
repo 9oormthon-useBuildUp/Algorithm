@@ -18,75 +18,60 @@ class Node {
 class Editor {
   constructor(string) {
     this.head = new Node(-1);
-    this.cursor = string.length;
-    this.total = string.length;
+    this.p_cursor = null;
     this.#init(string);
   }
 
   // 초기화
   #init(string) {
-    let currNode = this.head;
-    const initNodeList = string.split('').map((char) => new Node(char));
-
-    while (initNodeList.length) {
-      const node = initNodeList.shift();
-      currNode.next = node;
-      node.prev = currNode;
-      currNode = currNode.next;
-    }
+    this.p_cursor = this.head;
+    string.split('').forEach((char) => {
+      const node = new Node(char);
+      this.p_cursor.next = node;
+      node.prev = this.p_cursor;
+      this.p_cursor = this.p_cursor.next;
+    });
   }
 
   // L : 커서를 왼쪽으로 한 칸 옮김
   prev() {
-    if (this.cursor) this.cursor -= 1;
+    if (this.p_cursor.prev) this.p_cursor = this.p_cursor.prev;
   }
 
   // D : 커서를 오른쪽으로 한 칸 옮김
   next() {
-    if (this.cursor + 1 <= this.total) this.cursor += 1;
+    if (this.p_cursor.next) this.p_cursor = this.p_cursor.next;
   }
 
   // P $ : $라는 문자를 커서 왼쪽에 추가
   insert(value) {
     const node = new Node(value);
-    let currNode = this.head;
 
-    for (let i = 0; i < this.cursor; i++) {
-      currNode = currNode.next;
-    }
-
-    if (this.total === this.cursor) {
-      currNode.next = node;
-      node.prev = currNode;
+    if (this.p_cursor.next) {
+      node.next = this.p_cursor.next;
+      node.prev = this.p_cursor;
+      this.p_cursor.next.prev = node;
+      this.p_cursor.next = node;
     } else {
-      node.next = currNode.next;
-      node.prev = currNode;
-      currNode.next.prev = node;
-      currNode.next = node;
+      this.p_cursor.next = node;
+      node.prev = this.p_cursor;
     }
 
-    this.cursor += 1;
-    this.total += 1;
+    this.p_cursor = this.p_cursor.next;
   }
 
   // B : 커서 왼쪽에 있는 문자를 삭제
   delete() {
-    if (this.cursor === 0) return;
+    if (!this.p_cursor.prev) return;
 
-    let currNode = this.head;
-    for (let i = 0; i < this.cursor; i++) {
-      currNode = currNode.next;
-    }
-
-    if (this.cursor === this.total) {
-      currNode.prev.next = null;
+    if (!this.p_cursor.next) {
+      this.p_cursor.prev.next = null;
     } else {
-      currNode.next.prev = currNode.prev;
-      currNode.prev.next = currNode.next;
+      this.p_cursor.next.prev = this.p_cursor.prev;
+      this.p_cursor.prev.next = this.p_cursor.next;
     }
 
-    this.cursor -= 1;
-    this.total -= 1;
+    this.p_cursor = this.p_cursor.prev;
   }
 
   print() {
