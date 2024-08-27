@@ -5,6 +5,7 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
+let inputLines = [];
 let al = {};
 
 for (let i = "a".charCodeAt(0); i <= "z".charCodeAt(0); i++) {
