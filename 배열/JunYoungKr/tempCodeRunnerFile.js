@@ -1,0 +1,2 @@
+
+console.log(str2);
