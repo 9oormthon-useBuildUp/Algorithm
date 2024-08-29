@@ -33,7 +33,6 @@ while(word1.length > idx1 && word2.length > idx2){
 
 //배열의 길이가 다를 수도 있으므로, 안 살펴본 알파벳의 수를 더해준다.
 cnt += (word1.length -idx1) + (word2.length - idx2);
-
 console.log(cnt);
 
 
