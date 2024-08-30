@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const filePath = process.platform === 'linux' ? 'dev/stdin' : '../../input.txt';
-const input = fs.readFileSync(filePath, 'utf-8').split('').map(Number);;
+const input = fs.readFileSync(filePath, 'utf-8').trim().split('').map(Number);
 
 // 0부터 8까지의 인덱스를 갖는 배열을 만들었다 -> 9는 6에 같이 저장한다.
 const freq = Array.from({length:9}).fill(0);
