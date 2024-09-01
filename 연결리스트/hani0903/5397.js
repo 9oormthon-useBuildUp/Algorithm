@@ -20,43 +20,17 @@ function init(length) {
 }
 
 function insert(data) {
-  //head
-  if (cursor === 0) {
-    if (nxt[0] === -1) {
-      //빈 배열인 경우
+  pre[unused] = cursor;
+  nxt[unused] = nxt[cursor];
+  nxt[cursor] = unused;
 
-      nxt[unused] = -1;
-      pre[unused] = 0;
-
-      nxt[0] = unused;
-    } else {
-      // 뒤에 노드가 있는 경우
-
-      pre[unused] = 0;
-      nxt[unused] = nxt[0];
-
-      nxt[0] = unused;
-      pre[nxt[unused]] = unused;
-    }
-  } else if (nxt[cursor] === -1) {
-    //tail
-
-    nxt[cursor] = unused;
-    pre[unused] = cursor;
-
-    nxt[unused] = -1;
-  } else {
-    pre[unused] = cursor;
-    nxt[unused] = nxt[cursor];
-
-    nxt[cursor] = unused;
+  if (nxt[cursor] !== -1) {
     pre[nxt[unused]] = unused;
   }
 
   dat[unused] = data;
   unused++;
   cursor = nxt[cursor];
-  //console.log(printDLL());
 }
 
 function left() {
@@ -72,26 +46,13 @@ function right() {
 }
 
 function deleteFromDLL() {
-  //empty
   if (cursor === 0) {
     return;
-  } else if (pre[cursor] === 0) {
-    //head
+  }
 
-    if (nxt[cursor] === -1) {
-      // no other nodes
-      nxt[0] = -1;
-    } else {
-      nxt[0] = nxt[cursor];
-      pre[nxt[cursor]] = 0;
-    }
-  } else if (nxt[cursor] === -1) {
-    // tail
-
-    nxt[pre[cursor]] = -1;
+  if (nxt[cursor] === -1) {
+    nxt[pre[cursor]] = nxt[cursor];
   } else {
-    //middle
-
     nxt[pre[cursor]] = nxt[cursor];
     pre[nxt[cursor]] = pre[cursor];
   }
