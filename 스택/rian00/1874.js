@@ -6,7 +6,7 @@ const input = require("fs")
 
 let [n, ...num] = input;
 num = [-1, ...num.map((e) => +e)];
-
+////////////////
 let stack = [];
 let result = [];
 let insertNum = 1;
