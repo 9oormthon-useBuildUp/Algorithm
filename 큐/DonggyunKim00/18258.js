@@ -49,8 +49,8 @@ class Queue {
   }
 }
 
-const [N, ...operate] = input;
-const solution = (n, operate) => {
+const [_, ...operate] = input;
+const solution = (operate) => {
   const queue = new Queue();
   const answer = [];
 
@@ -80,5 +80,5 @@ const solution = (n, operate) => {
   return answer;
 };
 
-const answer = solution(Number(N[0]), operate).join('\n');
+const answer = solution(operate).join('\n');
 console.log(answer);
