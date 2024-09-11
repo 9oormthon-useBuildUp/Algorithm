@@ -5,30 +5,11 @@ class Deque {
     this.tail = N;
   }
 
-  push_front(X) {
-    this.head -= 1;
-    this.storage[this.head] = X;
-  }
-
-  push_back(X) {
-    this.storage[this.tail] = X;
-    this.tail += 1;
-  }
-
   pop_front() {
-    if (this.empty()) return -1;
+    if (this.#empty()) return -1;
 
     const temp = this.storage[this.head];
     this.head += 1;
-
-    return temp;
-  }
-
-  pop_back() {
-    if (this.empty()) return -1;
-
-    this.tail -= 1;
-    const temp = this.storage[this.tail];
 
     return temp;
   }
@@ -37,12 +18,8 @@ class Deque {
     return this.tail - this.head;
   }
 
-  empty() {
+  #empty() {
     return this.size() === 0;
-  }
-
-  front() {
-    return this.empty() ? -1 : this.storage[this.head];
   }
 
   indexOf(value) {
