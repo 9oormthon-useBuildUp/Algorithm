@@ -4,41 +4,63 @@ const { resourceUsage } = require('process');
 const filePath = process.platform === 'linux' ? '/dev/stdin' : '../../input.txt';
 const input = fs.readFileSync(filePath, 'utf-8').trim().split('\n');
 
+class Node{
+    constructor(item){
+        this.item = item;
+        this.next = null;
+    }
+}
+
 class Queue {
 
     constructor(){
-        this.items = {};
-        this.head = 0;
-        this.tail = 0;
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
     }
 
     enqueue(item){
-        this.items[this.tail++]=item;
+        const node = new Node(item);
+
+        if(this.head === null){
+            this.head = node;
+        }else{
+            this.tail.next = node;
+        }
+
+        this.tail = node;
+        this.size++;
+        
     }
 
     dequeue(){
+        if(this.head === null) return -1;        
+        const popItem = this.head;
+        this.head = popItem.next;
 
-        if(this.head === this.tail) return -1;
-        const res = this.items[this.head];
-        delete this.items[this.head];
-        this.head++;
-        return res;
+        if (this.head === null) {
+            this.tail = null;
+        }
+
+        this.size--;
+        
+        return popItem.item;
     }
 
     peek(){
-        return this.head === this.tail ? -1 : this.items[this.head];
+        return this.size === 0 ? -1 : this.head.item;
     }
 
     back(){
-        return this.head === this.tail ? -1 : this.items[this.tail - 1];
+        return this.size === 0 ? -1 : this.tail.item;
     }
 
     getSize(){
-        return this.tail - this.head;
+        return this.size;
     }
 
     isEmpty(){
-        return this.head === this.tail ? 1 : 0;
+        return this.size === 0 ? 1 : 0;
     }
 }
 
