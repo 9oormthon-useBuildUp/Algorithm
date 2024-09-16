@@ -20,5 +20,6 @@ for (let i = N - 1; i >= 0; i--) {
   }
   stack.push(arr[i]);
 }
+
 result.reverse();
 console.log(result.join(" "));
