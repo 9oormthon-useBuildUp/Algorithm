@@ -1,11 +1,11 @@
 const solution = (input) => {
   const answer = [];
 
-  input.forEach((char) => {
+  input.forEach((PS) => {
     let count = 0;
 
-    for (let i = 0; i < char.length; i++) {
-      count += char[i] === '(' ? 1 : -1;
+    for (let i = 0; i < PS.length; i++) {
+      count += PS[i] === '(' ? 1 : -1;
 
       if (count < 0) break;
     }
