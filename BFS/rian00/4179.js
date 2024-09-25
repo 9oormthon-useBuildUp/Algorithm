@@ -13,6 +13,7 @@ class Point {
     this.step = _step;
   }
 }
+
 const [H, W] = input[0].split(" ").map((e) => +e);
 const board = [];
 for (let i = 1; i <= H; i++) {
