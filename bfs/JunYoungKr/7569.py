@@ -46,5 +46,8 @@ for i in range(H):
                 print(-1)
                 exit(0)
             count = max(count, graph[i][j][k])
-            
+            # 가장 바깥쪽 반복문에서 count를 비교하는 2차원 배열과는 다르게 
+            # 3차원 배열에서는 맨 마지막 반복문에서 count를 비교한다.
+            # 2차원 배열의 경우 graph[i][j][i]에서 가장 큰 값을 계산하여 한 번에 count 값을 갱신한다
+            # 3차원 배열의 경우 graph의 값 중에서 가장 큰 값이 익히는 데 걸린 시간을 의미한다
 print(count-1)
