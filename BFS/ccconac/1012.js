@@ -8,8 +8,6 @@ const bfs = (startX, startY, map, N, M) => {
       const xPos = x + ds[i][0];
       const yPos = y + ds[i][1];
 
-      console.log(xPos, yPos);
-
       if (xPos >= 0 && yPos >= 0 && xPos < N && yPos < M && map[xPos][yPos]) {
         map[xPos][yPos] = 0;
         queue.push([xPos, yPos]);
