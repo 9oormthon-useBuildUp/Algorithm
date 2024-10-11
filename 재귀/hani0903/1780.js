@@ -1,41 +1,32 @@
 const fs = require('fs');
 const path = process.platform === 'linux' ? '/dev/stdin' : 'Wiki\\input.txt';
-const input = fs.readFileSync(path).toString().trim().split('\n');
+const [N, ...paper] = fs.readFileSync(path).toString().trim().split('\n').map(row => row.split(' ').map(Number));
 
-// input
-const N = Number(input[0]);
-const PAPER = [];
-const cnt = { "-1": 0, "0": 0, "1": 0 };
 
-// paper array
-for (let i = 1; i <= N; i++){    
-    PAPER.push(input[i].split(' '));
-}
+let answer = [0, 0, 0];
 
-const cutPaper = (paper, size) => {
+const cutPaper = (rStart, cStart, size) => {
 
-    // 탈출 조건
-    const firstValue = paper[0][0];
-    if (paper.every(row => row.every(v => v === firstValue))) {
+    const first = paper[rStart][cStart];
+    const same = paper.slice(rStart, rStart + size).map(row => row.slice(cStart, cStart + size)).every(row => row.every(v => v === first));
+
+    if (same) {
 
         // 종이 종류 확인
-        cnt[paper[0][0]]++;
+        answer[first + 1]++;
         return;
+    } else {
+        
+        // 9개로 조각 낼건데
+        size /= 3;
+        for (let i = 0; i < 9; i++){
+            const rowNum = Math.floor(i / 3);
+            const colNum = i % 3;
+
+            cutPaper(rStart + rowNum * size, cStart + colNum * size, size)
+        }
     }
+};
 
-    size /= 3;
-
-    // 9개로 조각 낼건데
-    for (let paperNum = 0; paperNum < 9; paperNum++){
-        const rowNum = Math.floor(paperNum / 3);
-        const colNum = paperNum % 3;
-
-        const newPaper = paper.slice(rowNum * size, rowNum * size + size).map(row => row.slice(colNum * size, colNum * size + size));
-        cutPaper(newPaper, size)
-    }
-}
-
-cutPaper(PAPER, N);
-console.log(cnt[-1]);
-console.log(cnt[0]);
-console.log(cnt[1]);
+cutPaper(0, 0, N);
+console.log(answer.join('\n'));
