@@ -32,8 +32,8 @@ const cutPaper = (rowStart, colStart, size) => {
         return;
     } else {
         
-        // 9개의 색종이를 만들어 cutPaper 다시 호출!
-        size /= 2; //자르니까 가로,세로 모두 1/3 사이즈가 된다.
+        // 4개의 색종이를 만들어 cutPaper 다시 호출!
+        size /= 2; //자르니까 가로,세로 모두 1/2 사이즈가 된다.
         for(let i = 0; i < 2; i++) {
             for(let j = 0; j < 2; j++) {
                 cutPaper(rowStart + i * size , colStart + j * size, size);
